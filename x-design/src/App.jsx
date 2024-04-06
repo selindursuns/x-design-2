@@ -131,6 +131,8 @@ const Scene = ({wobbleIntensity, thickness, color}) => {
       <directionalLight position={[0, 0, 2]} intensity ={lightIntensity} ref={directionalLightRef} color = {lightColor}/>
       <ambientLight intensity={0.4} />
 
+ {/* i have been trying some basic shapes as well hihi  */}
+ 
        {/* <group position = {[0, -1, 0]}>
        <Cube position={[1,0,0]} color = {"green"} size ={[1, 1, 1]} />
        <Cube position = {[-1, 0, 0]} color = {"purple"} size = {[1, 1, 1]} />
