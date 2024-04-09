@@ -34,7 +34,7 @@ const Sphere = ({ position, size, color }) => {
   const ref = useRef()
 
   useFrame((state, delta) => {
-    ref.current.rotation.x += delta  //difference in time between the current frame and the last frame
+    ref.current.rotation.x  += delta  //difference in time between the current frame and the last frame
     // console.log(state)
     // ref.current.rotation.y += delta * 2.0
     // console.log(state.clock.elapsedTime)
@@ -43,7 +43,7 @@ const Sphere = ({ position, size, color }) => {
   return (
     <mesh position = {position} ref={ref}> 
       <sphereGeometry args = {size} />
-      <meshStandardMaterial color = {color} wireframe/>
+      <meshStandardMaterial color = {color} wireframe = {true}/>
 
     </mesh>
   )
@@ -51,41 +51,41 @@ const Sphere = ({ position, size, color }) => {
 
 const Torus = ({ position, size, color }) => {
   return (
-    <mesh position = {position}>
+    <mesh position = {position} rotation = {[Math.PI / 2, 0, 0]} >
       <torusGeometry args = {size} />
       <meshStandardMaterial color = {color} wireframe/>
     </mesh>
   )
 }
 
-const TorusKnot = ({ position, size}) => {
+// const TorusKnot = ({ position, size}) => {
 
-  const ref = useRef()
+//   const ref = useRef()
 
-  const {color, radius} = useControls({
-    color: "lightblue",
-    radius: {
-      min: 1,
-      max: 10,
-      step: 0.5,
-    }
-  })
-  // useFrame((state, delta) => {
-  //   ref.current.rotation.x += delta  //difference in time between the current frame and the last frame
-  //   console.log(state)
-  //   ref.current.rotation.y += delta * 2.0
-  //   ref.current.position.z = Math.sin(state.clock.elapsedTime) * 2
-  //   console.log(state.clock.elapsedTime)
-  // })
+//   const {color, radius} = useControls({
+//     color: "pink",
+//     radius: {
+//       min: 1,
+//       max: 10,
+//       step: 0.5,
+//     }
+//   })
+//   // useFrame((state, delta) => {
+//   //   ref.current.rotation.x += delta  //difference in time between the current frame and the last frame
+//   //   console.log(state)
+//   //   ref.current.rotation.y += delta * 2.0
+//   //   ref.current.position.z = Math.sin(state.clock.elapsedTime) * 2
+//   //   console.log(state.clock.elapsedTime)
+//   // })
 
-  return (
-    <mesh position = {position} ref ={ref}>
-      <torusKnotGeometry args = {size} />
-      {/* <meshStandardMaterial color = {color} /> */}
-      <MeshWobbleMaterial factor={2} speed={0.8} color={color}/>
-    </mesh>
-  )
-}
+//   return (
+//     <mesh position = {position} ref ={ref}>
+//       <torusKnotGeometry args = {size} />
+//       {/* <meshStandardMaterial color = {color} /> */}
+//       <MeshWobbleMaterial factor={2} speed={0.8} color={color}/>
+//     </mesh>
+//   )
+// }
 
 
 const TorusKnotAvatar = ({ wobbleIntensity, thickness, color }) => {
@@ -102,7 +102,7 @@ const TorusKnotAvatar = ({ wobbleIntensity, thickness, color }) => {
 
   return (
     <mesh ref={ref}>
-      <torusKnotGeometry args={[1.7, mappedThickness, 2000, 20]} />
+      <torusKnotGeometry args={[1.5, mappedThickness, 2000, 20]} />
       <MeshWobbleMaterial factor={mappedWobbleIntensity} color={color} speed={2} />
     </mesh>
   );
@@ -142,8 +142,8 @@ const Scene = ({wobbleIntensity, thickness, color}) => {
 
       {/* <Cube position = {[0, 0, 0]} size = {[1, 1, 1]} color = {"orange"} /> */}
 
-      {/* <Sphere position={[0,0,0]} size = {[1, 30, 30]} color = {"orange"}/> */}
-      {/* <Torus position={[2,0,0]} size = {[0.8, 0.1, 30, 30]} color = {"blue"}/> */}
+      <Sphere position={[0,1.5,0.8]} size = {[1, 30, 30]} color = {"lightblue"} />
+      <Torus position={[0,3,0]} size = {[0.8, 0.1, 3000, 30]} color = {"blue"}/>
       {/* <TorusKnot position={[-2,0,0]} size = {[1, 0.7, 1000, 50]} color = {"hotpink"}/>  */}
 
       <TorusKnotAvatar wobbleIntensity={wobbleIntensity} thickness={thickness} color={color} />
